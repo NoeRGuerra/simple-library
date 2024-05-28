@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 1fr 5fr 1fr;
+    font-family: sans-serif;
+    align-items: center;
+}
+
+header, footer {
+    font-size: 2rem;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 10fr;
+
+}
+
+.books {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+    grid-auto-flow: column;
+}
+
+footer {
+    font-size: 1.2rem;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.2) -2px -2px 2px;
+}
