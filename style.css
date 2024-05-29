@@ -56,6 +56,21 @@ button:hover {
     grid-auto-flow: column;
 }
 
+.book-input {
+    display: grid;
+    grid-column: 1 / 4;
+}
+
+.book-input button {
+    width: 100%;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+}
+
 footer {
     font-size: 1.2rem;
     text-align: center;
