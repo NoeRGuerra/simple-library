@@ -9,9 +9,11 @@ body {
     grid-template-rows: 1fr 5fr 1fr;
     font-family: sans-serif;
     align-items: center;
+    gap: 20px;
 }
 
-header, footer {
+header,
+footer {
     font-size: 2rem;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px;
@@ -21,11 +23,30 @@ header, footer {
     justify-content: center;
 }
 
+header {
+    background-color: white;
+}
+
 main {
     height: 100%;
     display: grid;
     grid-template-rows: 1fr 10fr;
+    justify-items: center;
+}
 
+body {
+    background-color: #dadada;
+}
+
+button {
+    width: 25%;
+    font-size: 1.2rem;
+    border: none;
+    background-color: #efefef;
+}
+
+button:hover {
+    background-color: #c4c4c4;
 }
 
 .books {
