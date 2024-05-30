@@ -38,10 +38,15 @@ main {
 }
 
 button {
-    width: 25%;
-    font-size: 1.2rem;
     border: none;
     background-color: #efefef;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+main>button {
+    width: 25%;
+    font-size: 1.2rem;
 }
 
 button:hover {
@@ -86,6 +91,11 @@ button:hover {
     width: clamp(150px, 15%, 200px);
     text-align: center;
     height: clamp(150px, 15%, 200px);
+}
+
+form.book-input {
+    width: auto;
+    height: auto;
 }
 
 footer {
