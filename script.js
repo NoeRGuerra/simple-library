@@ -6,11 +6,14 @@ const booksContainer = document.querySelector(".books-container");
 const myLibrary = [];
 let lastIndex = 0;
 
-function Book(title, author, pages, read){
+function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.toggleRead = () => {
+        this.read = !this.read;
+    }
 }
 
 function addBookToLibrary(book) {
@@ -20,12 +23,24 @@ function addBookToLibrary(book) {
 
 function displayBook(book) {
     let bookElement = document.createElement("div");
-    for (const key in book){
-        let element = document.createElement("p");
-        element.textContent = book[key];
+    let element;
+    for (const key in book) {
+        if (typeof book[key] == 'function')
+            continue;
+        if (key == "read") {
+            element = document.createElement("button");
+            element.innerText = book.read ? "Read" : "Not read";
+            element.addEventListener("click", () => {
+                book.toggleRead();
+                element.innerText = book.read ? "Read" : "Not read";
+            });
+        } else {
+            element = document.createElement("p");
+            element.textContent = book[key];
+        }
         bookElement.appendChild(element);
-        bookElement.setAttribute("data-index-number", myLibrary.length-1);
     }
+    bookElement.setAttribute("data-index-number", myLibrary.length - 1);
     let removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
     removeButton.addEventListener("click", () => {
@@ -33,6 +48,7 @@ function displayBook(book) {
         myLibrary.splice(index, 1);
         booksContainer.removeChild(bookElement);
     });
+
     bookElement.appendChild(removeButton);
     bookElement.classList.add("book");
     bookElement.classList.add("card");
