@@ -72,25 +72,33 @@ button:hover {
     grid-auto-rows: minmax(max-content, 150px);
 }
 
+.card {
+    display: grid;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    width: clamp(150px, 15%, 200px);
+    text-align: center;
+    height: clamp(150px, 15%, 200px);
+}
+
 .book-input {
     display: none;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     z-index: 1;
     justify-self: center;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+.book-input>input {
+    font-size: 1.2rem;
+    padding: 5px;
 }
 
 .book-input button {
     width: 100%;
-}
-
-.card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 15px;
-    width: clamp(150px, 15%, 200px);
-    text-align: center;
-    height: clamp(150px, 15%, 200px);
 }
 
 form.book-input {
