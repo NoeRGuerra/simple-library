@@ -4,7 +4,7 @@ const submitBookBtn = document.querySelector("form>button");
 const booksContainer = document.querySelector(".books-container");
 
 const myLibrary = [];
-const lastIndex = 0;
+let lastIndex = 0;
 
 function Book(title, author, pages, read){
     this.title = title;
@@ -28,6 +28,11 @@ function displayBook(book) {
     }
     let removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", () => {
+        let index = parseInt(bookElement.getAttribute("data-index-number"));
+        myLibrary.splice(index, 1);
+        booksContainer.removeChild(bookElement);
+    });
     bookElement.appendChild(removeButton);
     bookElement.classList.add("book");
     bookElement.classList.add("card");
