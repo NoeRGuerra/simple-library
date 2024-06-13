@@ -19,6 +19,22 @@ class Book {
     }
 }
 
+class Library {
+    constructor() {
+        this.books = [];
+    }
+
+    addBook(book) {
+        this.books.push(book);
+    }
+
+    removeBook(book) {
+        let index = this.books.indexOf(book);
+        if (index !== -1)
+            this.books.splice(index, 1);
+    }
+}
+
 function addBookToLibrary(book) {
     myLibrary.push(book);
     lastIndex = myLibrary.length - 1;
