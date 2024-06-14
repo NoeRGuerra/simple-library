@@ -3,9 +3,6 @@ const inputForm = document.querySelector("form");
 const submitBookBtn = document.querySelector("form>button");
 const booksContainer = document.querySelector(".books-container");
 
-const myLibrary = [];
-let lastIndex = 0;
-
 class Book {
     constructor(title, author, pages, read){
         this.title = title;
@@ -35,17 +32,12 @@ class Library {
     }
 }
 
-function addBookToLibrary(book) {
-    myLibrary.push(book);
-    lastIndex = myLibrary.length - 1;
-}
-
 function displayBook(book) {
     let bookElement = document.createElement("div");
+    bookElement.classList.add("book");
+    bookElement.classList.add("card");
     let element;
     for (const key in book) {
-        if (typeof book[key] == 'function')
-            continue;
         if (key == "read") {
             element = document.createElement("button");
             element.innerText = book.read ? "Read" : "Not read";
@@ -59,18 +51,14 @@ function displayBook(book) {
         }
         bookElement.appendChild(element);
     }
-    bookElement.setAttribute("data-index-number", myLibrary.length - 1);
     let removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
     removeButton.addEventListener("click", () => {
-        let index = parseInt(bookElement.getAttribute("data-index-number"));
-        myLibrary.splice(index, 1);
+        myLibrary.removeBook(book);
         booksContainer.removeChild(bookElement);
     });
 
     bookElement.appendChild(removeButton);
-    bookElement.classList.add("book");
-    bookElement.classList.add("card");
     booksContainer.appendChild(bookElement);
 }
 
@@ -86,7 +74,7 @@ submitBookBtn.addEventListener("click", (event) => {
     let pages = document.querySelector("input#pages");
     let read = document.querySelector("input#read");
     let newBook = new Book(title.value, author.value, pages.value, read.value);
-    addBookToLibrary(newBook);
+    myLibrary.addBook(newBook);
     title.value = "";
     author.value = "";
     pages.value = "";
@@ -95,3 +83,5 @@ submitBookBtn.addEventListener("click", (event) => {
     addBookBtn.removeAttribute("disabled");
     displayBook(newBook);
 })
+
+const myLibrary = new Library();
