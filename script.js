@@ -62,6 +62,17 @@ function displayBook(book) {
     booksContainer.appendChild(bookElement);
 }
 
+function isFormValid(form){
+    let isValid = true;
+    for (let element of form.querySelectorAll("input")){
+        isValid = element.validity.valid;
+        if (!isValid){
+            return isValid;
+        }
+    }
+    return isValid;
+}
+
 addBookBtn.addEventListener("click", () => {
     inputForm.style.display = "grid";
     addBookBtn.setAttribute("disabled", true);
@@ -69,10 +80,14 @@ addBookBtn.addEventListener("click", () => {
 
 submitBookBtn.addEventListener("click", (event) => {
     event.preventDefault();
+    if (!isFormValid(inputForm)){
+        return;
+    }
     let title = document.querySelector("input#title");
     let author = document.querySelector("input#author");
     let pages = document.querySelector("input#pages");
     let read = document.querySelector("input#read");
+
     let newBook = new Book(title.value, author.value, pages.value, read.value);
     myLibrary.addBook(newBook);
     title.value = "";
@@ -83,5 +98,36 @@ submitBookBtn.addEventListener("click", (event) => {
     addBookBtn.removeAttribute("disabled");
     displayBook(newBook);
 })
+
+function validateTextInput(element, message) {
+    if (element.validity.valueMissing) {
+        element.setCustomValidity(message);
+    } else {
+        element.setCustomValidity("");
+    }
+    element.reportValidity();
+}
+
+function validateNumberOfPages() {
+    if (pages.validity.rangeOverflow) {
+        pages.setCustomValidity("Number of pages can't be bigger than 9999");
+    } else if (pages.validity.rangeUnderflow) {
+        pages.setCustomValidity("Number of pages can't be smaller than 1");
+    } else {
+        pages.setCustomValidity("");
+    }
+    pages.reportValidity();
+}
+
+title.addEventListener("input", () => {
+    validateTextInput(title, "A title for the book is required");
+});
+
+author.addEventListener("input", () => {
+    validateTextInput(author, "An author for the book is required");
+});
+
+pages.addEventListener("input", validateNumberOfPages);
+
 
 const myLibrary = new Library();

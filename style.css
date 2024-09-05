@@ -111,3 +111,11 @@ footer {
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.2) -2px -2px 2px;
 }
+
+input:invalid {
+    box-shadow: 0 0 5px 1px red;
+}
+
+input:focus:invalid {
+    box-shadow: none;
+}
